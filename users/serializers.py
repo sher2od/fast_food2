@@ -12,6 +12,6 @@ class RegisterSerializer(serializers.ModelSerializer):
             username=validated_data['username'],
             password=validated_data['password'],
             first_name=validated_data.get('first_name', ''),
-            role='customer'  # yangi ro'yxatdan o'tganlar avtomatik mijoz bo'ladi
+            role='customer'
         )
         return user

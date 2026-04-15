@@ -15,7 +15,7 @@ class Order(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
     latitude = models.DecimalField(max_digits=9, decimal_places=6)
     longitude = models.DecimalField(max_digits=9, decimal_places=6)
-    delivery_time = models.IntegerField()  # minutda
+    delivery_time = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
