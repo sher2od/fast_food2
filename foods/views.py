@@ -21,7 +21,7 @@ def food_list(request):
 @permission_classes([IsAuthenticated])
 def create_food(request):
     if not is_ofitsiant_or_admin(request.user):
-        return Response({"error": "Sizda taom qo'shish huquqi yo'q"}, status=403)
+        return Response({"error": "Ruxsat yo'q"}, status=403)
         
     data = request.data
     name = data.get('name')
@@ -39,7 +39,7 @@ def create_food(request):
     res = execute_sql(sql, [name, desc, price, category_id])
     
     if res:
-        return Response({"message": "Taom muvaffaqiyatli qo'shildi", "food_id": res[0]['id']})
+        return Response({"message": "Taom qo'shildi", "food_id": res[0]['id']})
     return Response({"error": "Xatolik yuz berdi"}, status=500)
 
 @api_view(['PUT'])
@@ -79,7 +79,7 @@ def update_food(request, pk):
     
     res = execute_sql(sql, params)
     if res:
-        return Response({"message": "Taom ma'lumotlari yangilandi"})
+        return Response({"message": "Taom yangilandi"})
     return Response({"error": "Taom topilmadi."}, status=404)
 
 @api_view(['DELETE'])
@@ -107,4 +107,4 @@ def create_category(request):
         
     sql = "INSERT INTO foods_category (name) VALUES (%s) RETURNING id;"
     res = execute_sql(sql, [name])
-    return Response({"message": "Yangi kategoriya yaratildi", "id": res[0]['id']})
+    return Response({"message": "Kategoriya yaratildi", "id": res[0]['id']})
